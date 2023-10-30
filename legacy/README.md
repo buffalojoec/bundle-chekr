@@ -1,6 +1,7 @@
 # Legacy Size
 
 ```
+pnpm tsc src/main.ts
 pnpm parcel build --detailed-report 2000
 ls -alh dist/
 ```

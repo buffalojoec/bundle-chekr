@@ -1,3 +1,5 @@
+.config
 /*/**/node_modules
 /*/**/.parcel-cache
-/*/**/dist
+/*/**/dist*
+/*/**/*.js

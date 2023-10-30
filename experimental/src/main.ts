@@ -1,3 +1,5 @@
+// import "@solana/webcrypto-ed25519-polyfill";
+
 import { pipe } from "@solana/functional";
 import {
   Blockhash,
@@ -20,11 +22,16 @@ import { transferSolInstruction } from "./transferSol";
 
 async () => {
   const sender = await generateKeyPair();
-  const toPubkey = await getAddressFromPublicKey(await generateKeyPair());
+  const senderPubkey = await getAddressFromPublicKey(sender.publicKey);
+  const toPubkey = await getAddressFromPublicKey(
+    (
+      await generateKeyPair()
+    ).publicKey
+  );
 
   const ix = transferSolInstruction(
     {
-      source: sender.publicKey,
+      source: senderPubkey,
       destination: toPubkey,
     },
     { amount: 1_000_000_000 }
@@ -53,7 +60,7 @@ async () => {
 
   const tx = pipe(
     createTransaction({ version: 0 }),
-    (tx) => setTransactionFeePayer(sender.publicKey, tx),
+    (tx) => setTransactionFeePayer(senderPubkey, tx),
     (tx) => setTransactionLifetimeUsingBlockhash(blockhashLifetime, tx),
     (tx) => prependTransactionInstruction(ix, tx)
   );
