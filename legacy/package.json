@@ -1,0 +1,37 @@
+{
+  "name": "legacy",
+  "version": "1.0.0",
+  "description": "",
+  "source": "./src/main.ts",
+  "main": "./dist/index.node.js",
+  "browser": "./dist/index.browser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@solana/web3.js": "^1.87.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.9",
+    "typescript": "^5.2.2",
+    "@parcel/compressor-gzip": "^2.10.1",
+    "@parcel/config-default": "^2.10.1",
+    "buffer": "^5.5.0||^6.0.0",
+    "parcel": "^2.10.1"
+  },
+  "targets": {
+    "main": {
+      "context": "node",
+      "includeNodeModules": true,
+      "optimize": true
+    },
+    "browser": {
+      "includeNodeModules": true,
+      "context": "browser",
+      "optimize": true
+    }
+  }
+}
